@@ -1,0 +1,66 @@
+
+.navbar-icon {
+    width: 50px;  /* Ajusta el tamaño del ícono a tu preferencia */
+    height: 50px;
+     /* Espacio a la derecha si es necesario */
+  }
+
+  .nav-link{
+    display: flex;
+    align-items: center;
+    height: 100%;  /* Asegura que ocupe toda la altura del navbar */
+  }
+
+  /* Opcional: para que el ícono cambie de color al pasar el mouse */
+  .nav-link:hover  {
+      /* Añade un efecto de hover al ícono */
+    background-color: white;
+    color: black !important;
+    }
+
+    .title-container {
+        background-color: black; /* Fondo negro */
+        text-align: center; /* Centrar el texto */
+        padding: 20px; /* Espaciado alrededor del título */
+      }
+      
+    .title {
+        color: white; /* Color de texto blanco */
+        font-size: 2.5em; /* Tamaño del texto */
+        margin: 0; /* Eliminar márgenes por defecto */
+        font-weight: bold; /* Negrita para mayor impacto */
+      }
+
+
+
+
+
+
+
+
+
+
+
+.carousel {
+    position: relative; /* Asegura que el carrusel se mantenga en el flujo normal */
+    z-index: 1; /* Eleva el carrusel si otros elementos lo están cubriendo */
+    
+}
+.carousel-control-prev, 
+.carousel-control-next {
+  position: absolute;
+  top: 50%;  /* Centra verticalmente */
+  transform: translateY(-50%);  /* Ajusta para que esté realmente centrado */
+  height: 100%;  /* Ajusta el tamaño de las flechas al alto del carrusel si lo necesitas */
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-item img {
+      height: 250px; /* Altura más baja en pantallas pequeñas */
+    }
+  }
