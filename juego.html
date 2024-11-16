@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="stylejuego.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="game-details">
+            <div class="vidas">Vidas: 3</div>
+            <div class="puntaje">Puntaje: </div>
+            <div class="premio">Premio: </div>
+        </div>
+        <div class="tablero"></div>
+    </div>
+
+    <!-- Modal de instrucciones -->
+    <div id="instruccionesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Instrucciones del Juego</h2>
+            <p><strong>Cómo jugar:</strong></p>
+            <ul>
+                <li>El juego es el clásico Snake. Consiste en comer la mayor cantidad de frutas. Al comerlas la serpiente crece. Ten cuidado con chocar con el límite del mapa y tu propio cuerpo.</li>
+                <li>Para ganar debes comer la cantidad de frutas necesarias para cada premio. Para esto tienes 3 vidas, además, si tienes vidas y ganaste un premio menor o mediano, puedes arriesgarlo para ganar un premio mayor.</li>
+            </ul>
+            <p><strong>Premios:</strong></p>
+               <li>Alcanza 30 puntos para el premio menor. </li> 
+               <li>Alcanza 40 puntos para el premio mediano. </li>
+               <li>Alcanza 50 puntos para el premio mayor. </li>
+            <button id="startButton">¡Jugar!</button>
+        </div>
+    </div>
+
+    <script src="scriptjuego.js"></script>
+</body>
+</html>
+

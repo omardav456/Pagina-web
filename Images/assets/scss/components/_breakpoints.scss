@@ -1,0 +1,157 @@
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 330px){
+   .container{
+      margin-inline: 1rem;
+   }
+
+   .home{
+      &__stone{
+         width: 370px;
+      }
+      &__tree{
+         width: 400px;
+      }
+      &__moon{
+         width: 520px;
+      }
+      &__titles{
+         bottom: 9rem;
+      }
+      &__data{
+         bottom: 2rem;
+      }
+   }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px){
+   .home{
+      &__container{
+         height: 85%;
+      }
+      &__grass,
+      &__stone,
+      &__tree,
+      &__moon{
+         width: 100%;
+      }
+      &__moon{
+         bottom: 3rem;
+      }
+      &__titles{
+         bottom: 13rem;
+      }
+      &__data{
+         bottom: 2rem;
+      }
+   }
+}
+
+@media screen and (min-width: 768px){
+   .home{
+      &__titles{
+         bottom: 16rem;
+      }
+      &__subtitle{
+         font-size: 2.5rem;
+      }
+      &__title{
+         font-size: 4.5rem;
+      }
+   }
+}
+
+/* For large devices */
+@media screen and (min-width: 968px){
+   .home{
+      &__container{
+         height: 90%;
+      }
+      &__moon{
+         bottom: 0;
+      }
+      &__titles{
+        bottom: 20rem;
+      }
+      &__data{
+         max-width: 768px;
+         left: 0;
+         right: 0;
+         margin-inline: auto;
+      }
+   }
+}
+
+@media screen and (min-width: 1150px){
+   .container{
+      margin-inline: auto;
+   }
+
+   .nav{
+      height: calc(var(--header-height) + 2rem);
+
+      &__toggle,
+      &__close{
+         display: none;
+      }
+      &__list{
+         flex-direction: row;
+         column-gap: 4rem;
+      }
+   }
+
+   .home{
+      &__container{
+         height: 100%;
+      }
+      &__titles{
+         bottom: 25rem;
+      }
+   }
+}
+
+@media screen and (min-width: 1400px) {
+   .home{
+      height: initial;
+
+      &__container{
+         height: 960px;
+      }
+      &__tree,
+      &__moon{
+         bottom: -3rem;
+      }
+      &__titles{
+         bottom: 31rem;
+      }
+      &__subtitle{
+         font-size: var(--big-font-size);
+      }
+      &__title{
+         font-size: var(--biggest-font-size);
+         line-height: 90%;
+      }
+   }
+
+   ::-webkit-scrollbar{
+      width: .6rem;
+      background-color: hsl(202, 16%, 15%);
+      
+      &-thumb{
+         background-color: hsl(202, 16%, 25%);
+      }
+   }
+}
+
+/* For 2K resolutions (2048 x 1152) */
+@media screen and (min-width: 2048px){
+   .home{
+      &__container{
+         height: 1200px;
+      }
+      &__titles{
+         bottom: 45rem;
+      }
+   }
+}

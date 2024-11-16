@@ -1,0 +1,44 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Jolly+Lodger&family=Montserrat:wght@400;500&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root{
+   --header-height: 3.5rem;
+
+   /*========== Colors ==========*/
+   /*Color mode HSL(hue, saturation, lightness)*/
+   --first-color: hsl(185, 100%, 48%);
+   --white-color: hsl(0, 0%, 100%);
+   --black-color: hsl(222, 100%, 2%);
+   --radial-color: radial-gradient(52% 52% at 50% 50%, 
+                        hsl(202, 90%, 38%) 0%, 
+                        hsl(222, 100%, 6%) 100%);
+
+   /*========== Font and typography ==========*/
+   /*.5rem = 8px | 1rem = 16px ...*/
+   --body-font: 'Montserrat', sans-serif;
+   --second-font: 'Jolly Lodger', cursive;
+
+   --biggest-font-size: 3rem;
+   --big-font-size: 1.5rem;
+   --h2-font-size: 1.25rem;
+   --normal-font-size: .938rem;
+   --small-font-size: .813rem;
+
+   // Responsive typography
+   @media screen and (min-width: 1150px){
+      --biggest-font-size: 9rem;
+      --big-font-size: 3.5rem;
+      --h2-font-size: 1.5rem;
+      --normal-font-size: 1rem;
+      --small-font-size: .875rem;
+   }
+
+	/*========== Font weight ==========*/
+   --font-regular: 400;
+   --font-medium: 500;
+
+	/*========== z index ==========*/
+   --z-tooltip: 10;
+   --z-fixed: 100;
+}

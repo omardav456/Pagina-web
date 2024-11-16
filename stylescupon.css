@@ -1,0 +1,93 @@
+/* Configuración básica */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+/* Contenedor de los cupones */
+.coupon-container {
+    position: relative;
+    text-align: center;
+}
+
+/* Botón de cupones */
+.coupon-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #2575fc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.coupon-btn:hover {
+    background-color: #1b4c9b;
+    transform: scale(1.05);
+}
+
+/* Menú desplegable */
+.coupon-menu {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Animación de entrada */
+.coupon-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Elementos del menú */
+.coupon-item {
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.coupon-item:last-child {
+    border-bottom: none;
+}
+
+.coupon-item p {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.apply-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #6a11cb;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.apply-btn:hover {
+    background-color: #5c0bb4;
+    transform: scale(1.1);
+}

@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -18,6 +19,7 @@
   $tipo="error";
   $loginExitoso=false;
   $enviomensaje=false;
+  $id_Cliente=0;
   
   // Crear la conexión
   $conn = new mysqli($servername, $username, $password, $dbname);
@@ -52,10 +54,13 @@
                     imprimirAlerta("Correo electrónico o contraseña incorrectos","error");
             
                 }else{
+                    $cliente = $resultado_verificacion->fetch_assoc(); // Obtiene la fila como un array asociativo
+                    $id_Cliente = $cliente['Id_Cliente'];
                     imprimirAlerta('Bienvenido','success');
                     
                     $loginExitoso = true;  
-  
+                    
+                    
                 }
             } else {
                     imprimirAlerta("Todos los campos son obligatorios.","error");
@@ -120,7 +125,8 @@
   
 
   if ($loginExitoso){
-    
+    session_start();
+    $_SESSION['id'] = $id_Cliente;
     header("Location: Index.php");
     exit();
 
@@ -138,38 +144,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
     crossorigin="anonymous">
-   
-    <style>
-        .contenedor-formulario{
-            border: 10px;
-            
-            background-position: 50% 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        
-a{
-    color: black;
-}
-#form-inicio{
-    display: block;
-}
-#form-registro{
-    display: none;
-}
-    </style>
-     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 </head>
 
 <body>
-    <?php 
+    <!--==================== HEADER ====================-->
+  <header class="header" id="header">
+         <nav class="nav container-nav">
+            <a href="Index.php" class="nav__logo">
+               Alkostico
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="Categorias.php" class="nav__link">Catalogo</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="carrito.php" class="nav__link">Carrito</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="evento.php" class="nav__link">Eventos</a>
+                  </li>
+
+                  <li class="nav__">
+                     <!-- Login button -->
+                     <a href="usuario.php" class="ri-user-line nav__login" id="login-btn"></a>
+                  </li>
+               </ul>
+               
+               <!-- Close button -->
+               <div class="nav__close" id="nav-close">
+                  <i class="ri-close-line"></i>
+               </div>
+            </div>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+               <i class="ri-apps-2-line"></i>
+            </div>
+            
+         </nav>
+</header>
+<?php 
     if(isset($_SESSION['alerta']) && !empty($_SESSION['alerta'])) {
         //print "xd";
     echo "<script>
@@ -188,20 +222,22 @@ a{
     
     ?>
     
-    <div class="container">
-        <div class="container form-control bg-primary text-black contenedor-formulario">
+    <div class="">
+        <div class="container contenedor-formulario">
               <div  >
                 
                 <form id="form-inicio" method="post">
-                    <h1>Iniciar sesión</h1>
-                    <div >
-                        <label class="form-label">Correo:</label>
-                        <input type="email" class="form-control" name="correoUsuario" id="correoUsuario" placeholder="ejemplo@gmail.com">
+                    <h1>Iniciar Sesión</h1>
+                    <div>
+                        <label class="form-label">Correo</label>
+                        <i class='bx bxs-envelope'></i>
+                        <input type="email" class="form-control" name="correoUsuario" id="correoUsuario" placeholder="Ejemplo@gmail.com">
                     </div>
                     <br>
                     <div >
-                        <label class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" name="passwordUsuario" id="passwordUsuario">
+                        <label class="form-label">Contraseña</label>
+                        <i class='bx bxs-lock-alt'></i>
+                        <input type="password" class="form-control" name="passwordUsuario" id="passwordUsuario" placeholder="*************">
                     </div>
                     <br>
                     <div>
@@ -248,12 +284,9 @@ a{
               </div>
         </div>
 
-        
     
 
     </div>
-   
-    
     <script>
         var enlace = document.getElementById('cambiarDisplay');
         var forminicio = document.getElementById('form-inicio');   
@@ -289,11 +322,24 @@ a{
                
         });
     </script>
+    <!--=============== MAIN JS ===============-->
+<script src="assets/js/main.js"></script>
+    
     
     
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 
