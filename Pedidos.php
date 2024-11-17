@@ -12,7 +12,7 @@ include 'funcionalidadFactura.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras</title>
+    <title>Facturas</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,9 +21,26 @@ include 'funcionalidadFactura.php';
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Arima:wght@100..700&family=Diplomata&family=Erica+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Paprika&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+80s+Fade&family=Rubik:ital,wght@0,300..900;1,300..900&family=Tilt+Prism&family=Ysabeau+SC:wght@1..1000&display=swap" rel="stylesheet"></style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+
 </head>    
     <style>
      /* Estilos de la barra de navegación */
+     /* Estilo base */
+  body {
+    background-color: #f5f5dc; /* Gris claro */
+    color:black;
+}
      .navbar {
             font-family: "Lato", sans-serif;
             font-weight: 100;
@@ -295,8 +312,55 @@ include 'funcionalidadFactura.php';
 
 
 <body>
+ <!--==================== HEADER ====================-->
+ <header class="header" id="header">
+         <nav class="nav container-nav">
+            <a href="Index.php" class="nav__logo">
+               Alkostico
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="Categorias.php" class="nav__link">Catalogo</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="carrito.php" class="nav__link">Carrito</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="evento.php" class="nav__link">Eventos</a>
+                  </li>
+
+                  <li class="nav__">
+                     <!-- Login button -->
+                     <a href="usuario.php" class="ri-user-line nav__login" id="login-btn"></a>
+                  </li>
+               </ul>
+               
+               <!-- Close button -->
+               <div class="nav__close" id="nav-close">
+                  <i class="ri-close-line"></i>
+               </div>
+            </div>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+               <i class="ri-apps-2-line"></i>
+            </div>
+            
+         </nav>
+</header>
+
+
+
+
+<br><br>
+
+
     <?php
-            $array=[1,2,3,4];
+            $array=consultarFacturas(intval( $_SESSION['id']));
             if (!empty($array)) {   
             echo "<table border='1'>";
             echo "<thead>";
@@ -312,7 +376,7 @@ include 'funcionalidadFactura.php';
             echo "</thead>";
             echo "<tbody>";
            $i=0;
-           $array=consultarFacturas(intval( $_SESSION['id']));
+           
             foreach ($array as $factura) {
                 $i++;
                 echo "<tr>";
@@ -338,7 +402,7 @@ include 'funcionalidadFactura.php';
                 echo "<td>";
                 echo'<form action="generar_pdf.php" method="post" style="display:inline;">
                         <input type="hidden" name="Id_Factura" value='.$factura['Id_Factura'].'">
-                        <button type="submit">Ver Factura</button>';
+                        <button class="boton-pagar" onclick="abrirVentanas()" type="submit">Ver Factura</button>';
                 echo"</form>";
                 echo "</td>";/*
                 echo "<td id='price-" . $producto['Id_Producto'] . "'>" . number_format($producto['Precio_Producto'], 2, ',', '.') . " COP</td>"; // Precio formateado
@@ -350,13 +414,20 @@ include 'funcionalidadFactura.php';
             echo "</table>";
             } else {
                 echo "<div class='NHP'>";
-                echo "<h2>Todavía no hay productos</h2>";
+                echo "<h2>No tienes facturas</h2>";
                  echo "</div>";
             }
             
           
         ?>
         
-    </div>    
+    </div>
+    <script type="text/javascript">
+        function abrirVentanas() {
+            // Abrir la primera ventana
+            window.open("usuario.php", "_blank");
+
+        }
+    </script>    
 </body>
 </html>

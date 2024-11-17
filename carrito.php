@@ -27,6 +27,7 @@ consultarCarrito(intval( $_SESSION['id']));
 
 // Verificar si se ha enviado un formulario para eliminar un producto
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Id_Producto'])) {
+    
     $id_producto = intval($_POST['Id_Producto']);
     echo $id_producto;
     eliminarDelCarrito(intval( $_SESSION['id']), $id_producto);
@@ -55,6 +56,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Id_Producto'])) {
 <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Arima:wght@100..700&family=Diplomata&family=Erica+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Paprika&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+80s+Fade&family=Rubik:ital,wght@0,300..900;1,300..900&family=Tilt+Prism&family=Ysabeau+SC:wght@1..1000&display=swap" rel="stylesheet"></style>
 </head>    
     <style>
+
+
+/* From Uiverse.io by andrew-demchenk0 */ 
+.buttoneliminar {
+  --main-focus: #2d8cf0;
+  --font-color: #323232;
+  --bg-color-sub: #dedede;
+  --bg-color: #eee;
+  --main-color: #323232;
+  position: relative;
+  width: 100px; /* Ancho ajustado */
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra contenido por defecto */
+  padding: 0 10px; /* Espaciado interno */
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.buttoneliminar, .buttoneliminar__icon, .buttoneliminar__text {
+  transition: all 0.3s ease;
+}
+
+.buttoneliminar .buttoneliminar__text {
+  color: var(--font-color);
+  font-weight: 600;
+  font-size: 14px; /* Tamaño ajustado del texto */
+  white-space: nowrap; /* Evitar saltos de línea */
+  opacity: 1; /* Texto visible por defecto */
+}
+
+.buttoneliminar .buttoneliminar__icon {
+  position: absolute;
+  height: 24px; /* Tamaño ajustado del ícono */
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%); /* Ícono inicialmente fuera del botón */
+  opacity: 0; /* Ocultar ícono inicialmente */
+}
+
+.buttoneliminar .svg {
+  width: 20px; /* Ajuste del ícono */
+  height: 20px;
+  fill: var(--main-color);
+}
+
+.buttoneliminar:hover .buttoneliminar__text {
+  opacity: 0; /* Ocultar texto al pasar el mouse */
+}
+
+.buttoneliminar:hover .buttoneliminar__icon {
+  transform: translateY(0); /* Mover ícono al centro */
+  opacity: 1; /* Mostrar ícono */
+}
+
+.buttoneliminar:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px var(--main-color);
+}
+
      /* Estilos de la barra de navegación */
      .navbar {
             font-family: "Lato", sans-serif;
@@ -394,7 +462,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Id_Producto'])) {
                 echo"<br>";
                 echo'<form method="post" style="display:inline;">
                         <input type="hidden" name="Id_Producto" value='.$producto['Id_Producto'].'">
-                        <button type="submit">Eliminar</button>';
+                        <button type="submit" class="buttoneliminar">
+                        <span class="buttoneliminar__text">Eliminar</span>
+                        <span class="buttoneliminar__icon"><svg xmlns="http://www.w3.org/2000/svg" width="512" viewBox="0 0 512 512" height="512" class="svg"><title></title><path style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320"></path><line y2="112" y1="112" x2="432" x1="80" style="stroke:#323232;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"></line><path style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40"></path><line y2="400" y1="176" x2="256" x1="256" style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><line y2="400" y1="176" x2="192" x1="184" style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><line y2="400" y1="176" x2="320" x1="328" style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line></svg></span>
+                        </button>';
                 echo"</form>";
                 echo "</td>";
                 echo "<td id='price-" . $producto['Id_Producto'] . "'>" . number_format($producto['Precio_Producto'], 2, ',', '.') . " COP</td>"; // Precio formateado

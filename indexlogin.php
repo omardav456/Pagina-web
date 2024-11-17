@@ -99,7 +99,7 @@
                             if ($sql->execute()) {
                                 
                                 
-                                imprimirAlerta('Bienvenido a Alkostico, inicia sesión','error');
+                                imprimirAlerta('Bienvenido a Alkostico, inicia sesión','success');
                                 
                                 
 

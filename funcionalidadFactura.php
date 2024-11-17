@@ -10,7 +10,7 @@ include 'funcionalidadCarrito.php';
     
         // Crear la conexión
         $conn = new mysqli($servername, $username, $password, $dbname);
-    
+        mysqli_set_charset($conn, "utf8mb4");
         // Verificar la conexión
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -65,14 +65,14 @@ $dbname = "sql10736060";
 
 // Crear la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+mysqli_set_charset($conn, "utf8mb4");
 // Verificar la conexión
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 // ID del cliente que deseas consultar
-$id_cliente = 1; // Cambia este valor según el cliente que deseas buscar
+
 
 // Consulta para obtener todas las facturas del cliente
 $sql = "SELECT * FROM Facturas WHERE Id_Cliente = ?";
@@ -100,10 +100,56 @@ $conn->close();
 
 
     }
-    function ObtenerFacturaporId($idFactura){
-        
-    }
+    function ObtenerFacturaporId($idFactura) {
+        // Datos de conexión
+        $servername = "sql10.freemysqlhosting.net";  
+        $username = "sql10736060";         
+        $password = "v3naSQAq5W";             
+        $dbname = "sql10736060";  
     
+        // Crear la conexión
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        mysqli_set_charset($conn, "utf8mb4");
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+    
+        // Preparar la consulta SQL
+        $sql = "SELECT * FROM Facturas WHERE Id_Factura = ?";
+        
+        // Usar sentencias preparadas para prevenir SQL Injection
+        if ($stmt = $conn->prepare($sql)) {
+            // Bind de los parámetros
+            $stmt->bind_param("i", $idFactura); // 'i' es el tipo de dato entero para idFactura
+    
+            // Ejecutar la consulta
+            $stmt->execute();
+    
+            // Obtener los resultados
+            $result = $stmt->get_result();
+    
+            // Verificar si se encontró la factura
+            if ($result->num_rows > 0) {
+                // Obtener los datos de la factura
+                $factura = $result->fetch_assoc(); // Retorna la factura como un arreglo asociativo
+    
+                // Aquí puedes retornar la factura o procesarla como desees
+                return $factura;
+            } else {
+                //echo "No se encontró la factura con el ID proporcionado.";
+                return null;
+            }
+    
+            // Cerrar la declaración
+            $stmt->close();
+        } else {
+            //echo "Error al preparar la consulta: " . $conn->error;
+        }
+    
+        // Cerrar la conexión
+        $conn->close();
+    }
 
 
 ?>

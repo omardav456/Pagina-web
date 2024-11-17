@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['fake'] = true;
             } else {
                 $id_producto = intval($_POST['AñadirCarrito']);
-                //agregarProducto(intval($_SESSION['id']), $id_producto, $cantidad);
+                agregarProducto(intval($_SESSION['id']), $id_producto, $cantidad);
                 header('Location: carrito.php');
                 exit();
             }
@@ -77,21 +77,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="Index.php" class="nav__logo">Alkostico</a>
+    <!--==================== HEADER ====================-->
+  <header class="header" id="header">
+         <nav class="nav container-nav">
+            <a href="Index.php" class="nav__logo">
+               Alkostico
+            </a>
+
             <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="Categorias.php" class="nav__link">Catalogo</a></li>
-                    <li class="nav__item"><a href="carrito.php" class="nav__link">Carrito</a></li>
-                    <li class="nav__item"><a href="evento.php" class="nav__link">Eventos</a></li>
-                    <li class="nav__item"><a href="conocenos.php" class="nav__link">Conocenos</a></li>
-                    <li class="nav__item"><a href="indexlogin.php" class="nav__link">Sign in</a></li>
-                    <li class="nav__"><a href="usuario.php" class="ri-user-line nav__login" id="login-btn"></a></li>
-                </ul>
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="Categorias.php" class="nav__link">Catalogo</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="carrito.php" class="nav__link">Carrito</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="evento.php" class="nav__link">Eventos</a>
+                  </li>
+
+                  <li class="nav__">
+                     <!-- Login button -->
+                     <a href="usuario.php" class="ri-user-line nav__login" id="login-btn"></a>
+                  </li>
+               </ul>
+               
+               <!-- Close button -->
+               <div class="nav__close" id="nav-close">
+                  <i class="ri-close-line"></i>
+               </div>
             </div>
-        </nav>
-    </header>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+               <i class="ri-apps-2-line"></i>
+            </div>
+            
+         </nav>
+</header>
 
     <div class="container" style="padding-top: 90px; padding-bottom: 15px">
         <div class="row bg-black text-light">

@@ -26,7 +26,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="stylejuego.css">
+    <link rel="stylesheet" href="stylejuegofinal.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

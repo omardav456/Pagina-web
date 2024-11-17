@@ -28,7 +28,7 @@ echo "<h1>Categoría Seleccionada: " . htmlspecialchars($categoria) . "</h1>";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Catalogo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
     crossorigin="anonymous">
@@ -305,72 +305,75 @@ echo "<h1>Categoría Seleccionada: " . htmlspecialchars($categoria) . "</h1>";
 
 
 <?php
-  // Verificar si hay resultados
-  echo "<div class='container'>";
-  if ($result->num_rows > 0) {
-      // Inicializamos un contador para controlar las filas
-      $contador = 0;
-      // Comenzamos la fila principal
-      echo "<div class='row'>";
-      // Generar una tarjeta Bootstrap por cada producto
-      while ($row = $result->fetch_assoc()) {
-          // Cada tarjeta ocupará espacio en la fila
-          echo "
-          <div class='col-12 col-sm-6 col-md-3 col-lg-3'>
-              <div class='card w-95 h-95 card-max' style='margin-top: 20px;'>
-                  <div class='card-img-container'>
-                    <img src='" . $row["URL_Producto"] . "' class='card-img-top' alt='Imagen de producto'>
-                  </div>
+// Verificar si hay resultados
+echo "<div class='container'>";
+if ($result->num_rows > 0) {
+    // Inicializamos un contador para controlar las filas
+    $contador = 0;
+    // Comenzamos la fila principal
+    echo "<div class='row'>";
+    // Generar una tarjeta Bootstrap por cada producto
+    while ($row = $result->fetch_assoc()) {
+        // Verificar si la cantidad de producto es mayor que 0
+        if ($row["Cantidad_Producto"] > 0) {
+            // Cada tarjeta ocupará espacio en la fila
+            echo "
+            <div class='col-12 col-sm-6 col-md-3 col-lg-3'>
+                <div class='card w-95 h-95 card-max' style='margin-top: 20px;'>
+                    <div class='card-img-container'>
+                        <img src='" . $row["URL_Producto"] . "' class='card-img-top' alt='Imagen de producto'>
+                    </div>
                     <div class='card-body'>
-                  <h5 class='card-title'>" . $row["Nombre_Producto"] . "</h5>
-                  <p class='card-text'>Cantidad disponible: " . $row["Cantidad_Producto"] . "</p>
-                  <form method='post' style='display:inline;'>
-                        <input type='hidden' name='AñadirCarrito' value='".$row['Id_Producto']."'>
-                        <button type='submit' style='border: none; background: none; padding: 0; cursor: pointer;'>
-                          <div data-tooltip='$".$row['Precio_Producto']."' class='button' >
-                            <div class='button-wrapper' >
-                              <div class='text'>Comprar</div>
-                                <span class='icon'>
-                            <svg viewBox='0 0 16 16' class='bi bi-cart2' fill='currentColor' height='16' width='16' xmlns='http://www.w3.org/2000/svg'>
-                            <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'></path>
-                            </svg>
-                            </span>
-                              </div>
-                          </div>
-                        </button>
-                  </form>
-                  
-                  <!-- Formulario para enviar datos a otra página -->
-                  <form action='detallesProducto.php' method='POST'>
-                      <input type='hidden' name='idproducto' value='" . htmlspecialchars($row["Id_Producto"], ENT_QUOTES) . "'>
-                      <input type='hidden' name='nombre' value='" . htmlspecialchars($row["Nombre_Producto"], ENT_QUOTES) . "'>
-                      <input type='hidden' name='descripcion' value='" . htmlspecialchars($row["Descripcion_Producto"], ENT_QUOTES) . "'>
-                      <input type='hidden' name='cantidad' value='" . htmlspecialchars($row["Cantidad_Producto"], ENT_QUOTES) . "'>
-                      <input type='hidden' name='precio' value='" . htmlspecialchars($row["Precio_Producto"], ENT_QUOTES) . "'>
-                      <input type='hidden' name='url' value='" . htmlspecialchars($row["URL_Producto"], ENT_QUOTES) . "'>
-                      <button type='submit' class='btn btn-secondary mt-2'>Ver detalles</button>
-                  </form>
-                  </div>
-              </div>
-          </div>";
-  
-          // Incrementamos el contador
-          $contador++;
-  
-          // Cada vez que llegamos a 4 productos, cerramos la fila y comenzamos una nueva
-          if ($contador % 20 == 0) {
-              //echo "</div><div class='row'>";
-          }
-      }
-  
-      // Cerramos la última fila si hay productos que mostrar
-      echo "</div>";
-  
-  } else {
-      echo "<p>No se encontraron productos.</p>";
-  }
-  echo "</div>";
-  ?>
+                        <h5 class='card-title'>" . $row["Nombre_Producto"] . "</h5>
+                        <p class='card-text'>Cantidad disponible: " . $row["Cantidad_Producto"] . "</p>
+                        <form method='post' style='display:inline;'>
+                            <input type='hidden' name='AñadirCarrito' value='" . $row['Id_Producto'] . "'>
+                            <button type='submit' style='border: none; background: none; padding: 0; cursor: pointer;'>
+                                <div data-tooltip='$" . $row['Precio_Producto'] . "' class='button'>
+                                    <div class='button-wrapper'>
+                                        <div class='text'>Comprar</div>
+                                        <span class='icon'>
+                                            <svg viewBox='0 0 16 16' class='bi bi-cart2' fill='currentColor' height='16' width='16' xmlns='http://www.w3.org/2000/svg'>
+                                                <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                        
+                        <!-- Formulario para enviar datos a otra página -->
+                        <form action='detallesProducto.php' method='POST'>
+                            <input type='hidden' name='idproducto' value='" . htmlspecialchars($row["Id_Producto"], ENT_QUOTES) . "'>
+                            <input type='hidden' name='nombre' value='" . htmlspecialchars($row["Nombre_Producto"], ENT_QUOTES) . "'>
+                            <input type='hidden' name='descripcion' value='" . htmlspecialchars($row["Descripcion_Producto"], ENT_QUOTES) . "'>
+                            <input type='hidden' name='cantidad' value='" . htmlspecialchars($row["Cantidad_Producto"], ENT_QUOTES) . "'>
+                            <input type='hidden' name='precio' value='" . htmlspecialchars($row["Precio_Producto"], ENT_QUOTES) . "'>
+                            <input type='hidden' name='url' value='" . htmlspecialchars($row["URL_Producto"], ENT_QUOTES) . "'>
+                            <button type='submit' class='btn btn-secondary mt-2'>Ver detalles</button>
+                        </form>
+                    </div>
+                </div>
+            </div>";
+
+            // Incrementamos el contador
+            $contador++;
+
+            // Cada vez que llegamos a 4 productos, cerramos la fila y comenzamos una nueva
+            if ($contador % 20 == 0) {
+                //echo "</div><div class='row'>"; // Si necesitas gestionar el formato de fila cada 20 productos
+            }
+        }
+    }
+
+    // Cerramos la última fila si hay productos que mostrar
+    echo "</div>";
+
+} else {
+    echo "<p>No se encontraron productos.</p>";
+}
+echo "</div>";
+?>
     
 
 <!--=============== MAIN JS ===============-->

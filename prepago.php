@@ -118,7 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     function updateTotal() {
-        alert(currentTotal);
         document.getElementById('totalInput').value = currentTotal; // Asegurarse de que el total sea correcto
     }
 </script>
